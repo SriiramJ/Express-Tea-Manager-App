@@ -1,0 +1,207 @@
+{
+	"info": {
+		"_postman_id": "87f24542-7c6b-4821-9c05-c53556716869",
+		"name": "Tea Application",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41077476"
+	},
+	"item": [
+		{
+			"name": "Add a tea",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Schema is valid\", function () {\r",
+							"  var schema = {\r",
+							"    type: \"object\",\r",
+							"    properties: {\r",
+							"      id: {\r",
+							"        type: \"number\"\r",
+							"      },\r",
+							"      name: {\r",
+							"        type: \"string\"\r",
+							"      },\r",
+							"      price: {\r",
+							"        type: \"string\"\r",
+							"      },\r",
+							"      createdAt: {\r",
+							"        type: \"string\"\r",
+							"      }\r",
+							"    },\r",
+							"    required: [\"id\", \"name\", \"price\", \"createdAt\"],\r",
+							"  };\r",
+							"\r",
+							"  var responseData = pm.response.json();\r",
+							"  pm.expect(tv4.validate(responseData, schema)).to.be.true;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"name\":\"ginger tea\",\r\n   \"price\":\"$30\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{produrl}}/teas",
+					"host": [
+						"{{produrl}}"
+					],
+					"path": [
+						"teas"
+					]
+				},
+				"description": "The `POST /teas` endpoint is used to create a new tea with the provided details.\n\n### Request Body\n\n- name (string, required): The name of the tea.\n    \n- price (string, required): The price of the tea.\n    \n\n### Response\n\nThe response of this request is a JSON schema representing the structure of the response. It will include the properties and data types of the response object."
+			},
+			"response": []
+		},
+		{
+			"name": "List all teas",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{produrl}}/teas",
+					"host": [
+						"{{produrl}}"
+					],
+					"path": [
+						"teas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List tea with id",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{mytea}}/teas/1",
+					"host": [
+						"{{mytea}}"
+					],
+					"path": [
+						"teas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update tea with id",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Dum Tea\",\r\n    \"price\":\"$20\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{mytea}}/teas/3",
+					"host": [
+						"{{mytea}}"
+					],
+					"path": [
+						"teas",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete tea with id",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Dum Tea\",\r\n    \"price\":\"$20\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{mytea}}/teas/1",
+					"host": [
+						"{{mytea}}"
+					],
+					"path": [
+						"teas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "mytea",
+			"value": "127.0.0.1:3000",
+			"type": "default"
+		},
+		{
+			"key": "produrl",
+			"value": "https://express-tea-manager-app.onrender.com",
+			"type": "string"
+		}
+	]
+}
